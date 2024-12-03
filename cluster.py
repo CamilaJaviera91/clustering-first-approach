@@ -37,3 +37,6 @@ if key1 not in df.columns or key2 not in df.columns or key3 not in df.columns:
 # Ensure the columns selected for clustering are numeric
 if not np.issubdtype(df[key2].dtype, np.number) or not np.issubdtype(df[key3].dtype, np.number):
     raise ValueError(f"The columns '{key2}' and '{key3}' must be numeric for clustering.")
+
+# Step 2: Select features for clustering
+X = df[[key2, key3]]  # Extract the numeric columns for clustering
