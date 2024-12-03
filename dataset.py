@@ -40,3 +40,13 @@ def collect_data():
                 key3.append(num_key3)
             except:
                 print("Invalid input. Please enter numbers only or type 'e'.")
+                
+    # Verify that all lists have the same length
+    if len(key1) != len(key2) or len(key2) != len(key3):
+        print(f"\n{k1}, {k2}, and {k3} lists MUST HAVE the same number of elements.")
+        print("Please re-enter the data\n")
+        return collect_data()  # Recursively call the function to restart data collection
+
+    # Combine data into a dictionary
+    data = {k1: key1, k2: key2, k3: key3}
+    return data
