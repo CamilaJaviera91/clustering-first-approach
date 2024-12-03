@@ -40,3 +40,7 @@ if not np.issubdtype(df[key2].dtype, np.number) or not np.issubdtype(df[key3].dt
 
 # Step 2: Select features for clustering
 X = df[[key2, key3]]  # Extract the numeric columns for clustering
+
+# Step 3: Apply K-means clustering
+kmeans = KMeans(n_clusters=3, random_state=42)  # Initialize the K-means algorithm
+df['Cluster'] = kmeans.fit_predict(X)  # Assign each data point to a cluster
