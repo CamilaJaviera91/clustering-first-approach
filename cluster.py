@@ -44,3 +44,31 @@ X = df[[key2, key3]]  # Extract the numeric columns for clustering
 # Step 3: Apply K-means clustering
 kmeans = KMeans(n_clusters=3, random_state=42)  # Initialize the K-means algorithm
 df['Cluster'] = kmeans.fit_predict(X)  # Assign each data point to a cluster
+
+# Step 4: Visualize the clustering results
+plt.figure(figsize=(8, 6))  # Set the figure size
+plt.scatter(
+    X[key2], X[key3], 
+    c=df["Cluster"], cmap="viridis", s=100  # Color points by cluster and use a colormap
+)
+
+# Annotate each point with its label (key1 values)
+for i, txt in enumerate(df[key1]):
+    plt.annotate(
+        txt, (X[key2].iloc[i], X[key3].iloc[i]), 
+        fontsize=9, xytext=(5, 5), textcoords='offset points'
+    )
+
+# Plot the centroids of the clusters
+centroids = kmeans.cluster_centers_
+plt.scatter(
+    centroids[:, 0], centroids[:, 1], 
+    c='red', s=300, marker='X', label='Centroids'  # Highlight centroids with a large red 'X'
+)
+
+# Add plot title and axis labels
+plt.title(f"{key1} clustering based on {key2} and {key3}")
+plt.xlabel(key2)  # Label for the x-axis
+plt.ylabel(key3)  # Label for the y-axis
+plt.legend()  # Show the legend
+plt.show()  # Display the plot
